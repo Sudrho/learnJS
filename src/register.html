@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+
+    <script type="text/javascript">
+        function check() {
+            var isPass=true;
+
+
+            var username = document.getElementById("username").length;
+            var usernameMsg=document.getElementById("usernameMsg");
+            if(username<3||username>6){
+                usernameMsg.innerText="用户名长度必须是3-6位";
+                isPass=false;
+            }else{
+                usernameMsg.innerText="";
+            }
+
+
+            var email=document.getElementById("email").value;
+            var emailMsg=document.getElementById("emailMsg");
+            var p=/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            if(p.test(email)===false){
+                emailMsg.innerText="邮箱格式不正确";
+                isPass=false;
+            }else{
+                emailMsg.innerText="";
+            }
+
+
+            var password=document.getElementById("password").value;
+            var passwordMsg=document.getElementById("passwordMsg");
+            var rePassword=document.getElementById("rePassword").value;
+            var rePasswordMsg=document.getElementById("rePasswordMsg");
+            if(password.length<6||password.length>10){
+                passwordMsg.innerText="密码必须在6-10位之间";
+                isPass=false;
+            }else{
+                passwordMsg.innerText="";
+                if(password!==rePassword){
+                    rePasswordMsg.innerText="两次输入密码不一致";
+                    isPass=false;
+                }else{
+                    rePasswordMsg.innerText="";
+                }
+            }
+
+
+            return isPass;
+        }
+        function checkUsername(username) {
+            var length=username.value.length;
+            var usernameMsg=document.getElementById("usernameMsg");
+            if(length<3||length>6){
+                usernameMsg.innerText="用户名长度必须是3-6位";
+            }else{
+                usernameMsg.innerText="";
+            }
+        }
+
+        function checkEmail(email) {
+            var emailMsg=document.getElementById("emailMsg");
+            var p=/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            if(p.test(email.value)===false){
+                emailMsg.innerText="邮箱格式不正确";
+            }else{
+                emailMsg.innerText="";
+            }
+        }
+        
+        function checkPassword() {
+            var password=document.getElementById("password").value;
+            var passwordMsg=document.getElementById("passwordMsg");
+            var rePassword=document.getElementById("rePassword").value;
+            var rePasswordMsg=document.getElementById("rePasswordMsg");
+            if(password.length<6||password.length>10){
+                passwordMsg.innerText="密码必须在6-10位之间";
+            }else{
+                passwordMsg.innerText="";
+                if(password!==rePassword){
+                    rePasswordMsg.innerText="两次输入密码不一致";
+                }else{
+                    rePasswordMsg.innerText="";
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <form action="register.jsp" onsubmit="return check()">
+        <table border="1" width="500px" height="500px">
+            <tr>
+                <td colspan="2" align="center">注册</td>
+            </tr>
+            <tr>
+                <td align="right">用户名：</td>
+                <td align="left"><input type="text" id="username" onblur="checkUsername(this)"/><font color="red" id="usernameMsg"></font></td>
+            </tr>
+            <tr>
+                <td align="right">邮箱：</td>
+                <td><input type="text" id="email" onblur="checkEmail(this)"/><font color="red" id="emailMsg"></font> </td>
+            </tr>
+            <tr>
+                <td align="right">密码：</td>
+                <td><input type="password" id="password" onblur="checkPassword()"/><font color="red" id="passwordMsg"></font> </td>
+            </tr>
+            <tr>
+                <td align="right">重复密码：</td>
+                <td><input type="password" id="rePassword" onblur="checkPassword()"/><font color="red" id="rePasswordMsg"></font> </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="注册"/></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
